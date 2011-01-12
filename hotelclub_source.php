@@ -55,52 +55,20 @@ class HotelclubSource extends DataSource
      *
      * @return mixed
      */
-    function query()
+    public function query()
     {
-        $service = null;
         $method = null;
         $queryData = null;
         $args = func_get_args();
-
         if (count($args) >= 2) {
-            $method = ucfirst($args[0]);
+            $method = $args[0];
             $queryData = $args[1];
         }
-
         if (!$method || !$queryData) {
             return false;
         }
-
-        switch ($method) {
-            case 'HotelAvailabilityRequest':
-            case 'HotelSearchRequest':
-                $service = 'Availability';
-                break;
-            case 'CityListRequest':
-            case 'CountryListRequest':
-            case 'HotelImageRequest':
-            case 'HotelInfoRequest':
-            case 'HotelListRequest':
-            case 'HotelSuburbListRequest':
-            case 'MonthlyFavouriteCityListRequest':
-            case 'TopCityListRequest':
-                $service = 'Content';
-                break;
-            case 'BookingStatusRequest':
-            case 'HotelBookingRequest':
-            case 'HotelRateRuleRequest':
-                $service = 'Reservation';
-                break;
-        }
-
-        if (!$service) {
-            return false;
-        }
-
         $hotelClub = new HotelClub();
-        foreach ($this->config as $key => $value) {
-            $hotelClub->$service->Config->$key = $value;
-        }
-        return $hotelClub->$service->$method($queryData[0]);
+        $hotelClub->$config = $this->config;
+        return $hotelClub->$method($queryData[0]);
     }
 }

@@ -24,10 +24,8 @@ CONFIGURATION
 
     var $hotelclub = array(
         'datasource' => 'hotelclub',
-        'affiliate' => array(
-            'id' => <YOUR AFFILIATE ID>,
-            'password' => '<YOUR AFFILIATE PASSWORD>'
-        )
+        'AffiliateID' => <YOUR AFFILIATE ID>,
+        'Password' => '<YOUR AFFILIATE PASSWORD>'
     );
 
 2. Add the following to your model:

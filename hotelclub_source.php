@@ -68,7 +68,7 @@ class HotelclubSource extends DataSource
             return false;
         }
         $hotelClub = new HotelClub();
-        $hotelClub->$config = $this->config;
+        $hotelClub->config = array_merge($hotelClub->config, $this->config);
         return $hotelClub->$method($queryData[0]);
     }
 }
